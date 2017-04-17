@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="verify-v1" content="FdS67lp25JxR0wFyIWCzz438Of26rNH9M4K34/1xBBQ=" />
+<meta name="description" content="Static Site Blogging with Jekyll - OS X Development -- Portfolio and work profile from Matthew Hurst, web designer and developer."  />
+<meta name="keywords" content="web design, web development, online portfolio, previous works, matthew hurst, matthew j hurst, hurst, matthew" />
+<title>Static Site Blogging with Jekyll - OS X Development - Matthew J Hurst</title>
+<link href="../../style_orange.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+<div id="container">
+<div id="header">
+    <a href="http://www.matthewjhurst.com"><img src="../../logo_orange.png" alt="Matthew J Hurst" /></a>
+    <div id="recent">
+    	<strong>RECENT POSTS</strong><br />
+	    
+			<a href="../..//blog/joomla-install-on-nearlyfreespeech">Joomla on NearlyFreeSpeech.net</a> >>> <em>Posted on 25 March 2010.</em><br />
+		
+			<a href="../..//blog/cross-browser-inline-block">Cross Browser Inline-Block</a> >>> <em>Posted on 27 January 2010.</em><br />
+		
+			<a href="../..//blog/hidden-osx-features">Hidden OSX Features</a> >>> <em>Posted on 26 January 2010.</em><br />
+		
+			<a href="../..//blog/valid-flash-embedding">XHTML 1.0 Transitional Valid Flash Embedding</a> >>> <em>Posted on 06 December 2009.</em><br />
+		
+			<a href="../..//blog/jekyll-blogging">Static Site Blogging with Jekyll</a> >>> <em>Posted on 24 November 2009.</em><br />
+		
+        <a href="../../all_posts.html"><span class="grey">...SEE ALL</span></a>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div id="mainContent">
+    <h2>Static Site Blogging with Jekyll - OS X Development</h2>
+    <h3>24 November 2009</h3>
+    </div>
+    <div class="clear"></div>
+    <div id="blogContent">
+		
+<p><span class="first">Lately</span>, I've been doing all development on my Macbook.  I'm on OS X 10.5.8 Leopard and I had been looking for a blogging solution that doesn't involve a database or scripting, just static pages.  I came across <a href="http://github.com/mojombo/jekyll">jekyll</a>. "Jekyll is a blog-aware, static site generator in Ruby."  In simpler terms, jekyll is a command line tool for generating a blog site without scripting or databases.</p>
+
+<p><span class="first">OS X 10.5.8 Leopard</span> comes with ruby and ruby gems but somewhere in the mix, the repository site for ruby changed and trying to install anything with RubyGems will error out.</p>
+
+<p><span class="first">Grab</span> a fresh version on <a href="http://rubyonrails.org/download">RubyGems</a>.</p>
+
+<p><span class="first">Extract</span>, then run:</p>
+<blockquote>ruby setup.rb</blockquote>
+
+<p><span class="first">Almost</span> ready to install jekyll; try this command:</p>
+
+<blockquote>
+sudo gem install mojombo-jekyll -s http://gems.github.com -s http://gems.rubyforge.org
+</blockquote>
+
+<p><span class="first">You</span> might have gotten a error like this:</p>
+
+<blockquote>
+Failed to build gem native extension.<br/>
+<br/>
+/usr/bin/ruby extconf.rb<br/>
+can't find header files for ruby.<br/>
+</blockquote>
+
+<p><span class="first">Or</span> maybe it worked perfectly.  If you did get this error, you need <span class="highlight">Xcode</span>. <a href="http://developer.apple.com/tools/xcode/">Grab it from apple's developer site</a>.  After installing that you should be ready to build your jekyll blog.</p>
+
+<p><span class="first">Now</span>, jekyll does have a built in web server, but I've got all my sites served by a local Apache server for development purposes.  To turn on Apache, go to <span class="highlight">System Prefernces</span> -> <span class="highlight">Sharing</span> -> <span class="highlight">Web Sharing checkbox</span>.  The default location Apache serves files from is <span class="highlight">/Library/Webserver/Documents/</span>.</p>
+
+<p><span class="first">Assuming</span> you're going to use the root directory of your webserver (http://localhost/), here's the directory structure we'll need for jekyll.</p>
+
+<blockquote>
+/Library/Webserver/Documents/_layouts<br/>
+/Library/Webserver/Documents/_posts<br />
+/Library/Webserver/Documents/_site<br />
+</blockquote>
+
+<p><span class="first">_layouts</span> is where you will definte the structure of your pages using <a href="http://wiki.github.com/mojombo/jekyll/yaml-front-matter">YAML Front Matter</a>.  For my site, I use a layout for my front page and a layout for a blog post bage.  Thus, my layout folder contains two files: <span class="highlight">blog.html</span> and <span class="highlight">default.html</span>.</p>
+
+<p><span class="first">Here</span> is <span class="highlight">default.html</span>.</p>
+
+<blockquote>
+&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;<br />
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;<br />
+&lt;head&gt;<br />
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;<br />
+&lt;meta name=&quot;description&quot; content=&quot;Portfolio and work profile from Matthew Hurst, web designer and developer.&quot;  /&gt;<br />
+&lt;meta name=&quot;keywords&quot; content=&quot;web design, web development, online portfolio, previous works, matthew hurst, matthew j hurst, hurst, matthew&quot; /&gt;<br />
+&lt;title&gt;&#123;&#123; page.title &#125;&#125;&lt;/title&gt;<br />
+&lt;link href=&quot;style_&#123;&#123; page.style &#125;&#125;.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;<br />
+&lt;/head&gt;<br />
+<br />
+&lt;body&gt;<br />
+<br />
+&lt;div id=&quot;container&quot;&gt;<br />
+  &#123;&#123; content &#125;&#125;<br />
+&lt;/div&gt;<br />
+&lt;/body&gt;<br />
+&lt;/html&gt;
+</blockquote>
+
+<p><span class="first">As</span> you can see, it looks like a plain html file with the exception of &#123;&#123; <em>variable</em> &#125;&#125;.  These are tags jekyll will use to generate static pages from your templates and content.  This particular template is only used on my front page.  You can use these tags in your jekyll content pages as well.  For example, here's a section from my <span class="highlight">index.html</span> which lists my most recent posts in the top right corner of the page.</p>
+
+<blockquote>
+&lt;strong&gt;RECENT POSTS&lt;/strong&gt;&lt;br /&gt;<br />
+	    &#123;% for post in site.posts limit:5 %&#125;<br />
+			&lt;a href=&quot;&#123;&#123; post.url &#125;&#125;&quot;&gt;&#123;&#123; post.title_short &#125;&#125;&lt;/a&gt; &gt;&gt;&gt; &lt;em&gt;Posted on &#123;&#123; post.date | date_to_long_string &#125;&#125;.&lt;/em&gt;&lt;br /&gt;<br />
+		&#123;% endfor %&#125;<br />
+        &lt;a href=&quot;all_posts.html&quot;&gt;&lt;span class=&quot;grey&quot;&gt;...SEE ALL&lt;/span&gt;&lt;/a&gt;<br />
+</blockquote>
+
+<p><span class="first">Jekyll</span> will parse pretty much every HTML file in your working directory. It's also important to note that all content pages must include a header formatting like this:</p>
+
+<blockquote>
+---<br />
+layout: default<br />
+title: Matthew Hurst - Design and Development<br />
+style: orange<br />
+---
+</blockquote>
+
+<p><span class="first">The</span> layout variable is the only really necessary piece.  You can pretty much make up as many other variables as you see fit.  Here I use a title and a style.  So I wrote a template for my main page, some content; and a template for my blog posts.  Now we're going to move on and make an actual post.</p>  
+
+<p><span class="first">Blog</span> posts are simply content pages in the <span class="highlight">_posts/</span> directory.  They must be named in the following format: <span class="highlight">yyyy-mm-dd-title-of-your-post</span>.  Here is an example blog post, <span class="highlight">2009-11-24-example-post.html</span>:</p>
+
+<blockquote>
+---<br />
+layout: blog<br />
+title: A Sample Blog Post<br />
+---<br />
+<br />
+This is a sample blog post!
+</blockquote>
+
+<p><span class="first">After</span> you build some layouts, content, and blog posts it's time to build your pages.  Open a terminal and run jekyll from your working directory.  Jekyll will create an <span class="highlight">_site/</span> directory with your generated content.  By default, jekyll will generate a folder structure based on the date and time of your posts(i.e. http://yoursite.com/2009/11/22/jekyll-blogging/).  To change this, run jekyll with the <span class="highlight">--permalink</span> parameter.  Here is some more in-depth information on <a href="http://wiki.github.com/mojombo/jekyll/permalinks">adjusting your permalinks</a>.  For my site, I'm taking out the date-based directories using:</p>
+
+<blockquote>
+jekyll --permalink=/blog/:title
+</blockquote>
+    </div>
+  <div class="clear"></div>
+	<script>
+		var idcomments_acct = '0c1241bf41d55ea637977d1a0f209771';
+		var idcomments_post_id;
+		var idcomments_post_url;
+	</script>
+	<span id="IDCommentsPostTitle" style="display:none"></span>
+	<script type='text/javascript' src='http://www.intensedebate.com/js/genericCommentWrapperV2.js'></script>
+  <div id="footer">
+    <p>&nbsp;</p>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="verify-v1" content="FdS67lp25JxR0wFyIWCzz438Of26rNH9M4K34/1xBBQ=" />
+<meta name="description" content="Installing Joomla on NearlyFreeSpeech.net - Web Development - Administration -- Portfolio and work profile from Matthew Hurst, web designer and developer."  />
+<meta name="keywords" content="web design, web development, online portfolio, previous works, matthew hurst, matthew j hurst, hurst, matthew" />
+<title>Installing Joomla on NearlyFreeSpeech.net - Web Development - Administration - Matthew J Hurst</title>
+<link href="../../style_orange.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+<div id="container">
+<div id="header">
+    <a href="http://www.matthewjhurst.com"><img src="../../logo_orange.png" alt="Matthew J Hurst" /></a>
+    <div id="recent">
+    	<strong>RECENT POSTS</strong><br />
+	    
+			<a href="../..//blog/joomla-install-on-nearlyfreespeech">Joomla on NearlyFreeSpeech.net</a> >>> <em>Posted on 25 March 2010.</em><br />
+		
+			<a href="../..//blog/cross-browser-inline-block">Cross Browser Inline-Block</a> >>> <em>Posted on 27 January 2010.</em><br />
+		
+			<a href="../..//blog/hidden-osx-features">Hidden OSX Features</a> >>> <em>Posted on 26 January 2010.</em><br />
+		
+			<a href="../..//blog/valid-flash-embedding">XHTML 1.0 Transitional Valid Flash Embedding</a> >>> <em>Posted on 06 December 2009.</em><br />
+		
+			<a href="../..//blog/jekyll-blogging">Static Site Blogging with Jekyll</a> >>> <em>Posted on 24 November 2009.</em><br />
+		
+        <a href="../../all_posts.html"><span class="grey">...SEE ALL</span></a>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div id="mainContent">
+    <h2>Installing Joomla on NearlyFreeSpeech.net - Web Development - Administration</h2>
+    <h3>25 March 2010</h3>
+    </div>
+    <div class="clear"></div>
+    <div id="blogContent">
+		
+<p><span class="first"><a href="http://www.nearlyfreespeech.net">NearlyFreeSpeech.net</a></span> offers very affordable hosting.  I use it for this site, as well as any development or test servers I need to set up for clients, and plan to use it for future sites.  They charge you only what you use in bandwidth and storage.  Besides domain name registration, I spend about $4-$8 dollars a year for this site.  Very Affordable.</p>
+
+<p><span class="first">One</span> drawback of such cheap hosting is virtually no support.  There's no automatic script for setting up your favorite CMS or blog framework, so you have to get your hands dirty with command-line dirt.  Many fellow users have paved the way with intructions on setting up Wordpress, but lately I've been doing a good amount of Joomla sites and didn't find and cut and dry installation instructions.  So, here are my own.</p>
+
+<p><span class="first">First</span>, we must upload all the Joomla files to the server.  Pretty self-explanatory here.  Get the latest files from <a href="http://www.joomla.org/download.html">http://www.joomla.org/download.html</a>, extract, upload.</p>
+
+<p><span class="first">Before</span> going through the Joomla install script, there are a couple extra things we'll need to do.  You'll need to ssh to your server.  I'm running OSX, so it's a simple command from my computer.  If you've got a Windows machine, I recommend using <a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/">PuTTy</a> to connect.</p>
+
+<blockquote>
+ssh username_sitename@ssh.phx.nearlyfreespeech.net
+</blockquote>
+
+<p><span class="first">I'm</span> not sure if this next command is necessary.  I initially had problems with Joomla trying to create new files.  You would think the permissions section(soon to follow) would take care of it, but that wasn't the case.  So to create an empty <strong>configuration.php</strong> file:</p>
+
+<blockquote>
+touch configuration.php
+</blockquote>
+
+<p><span class="first">One</span> more thing before setting the permissions.  We've got to create a database for Joomla.  Request the MySQL database through your NearlyFreeSpeech account panel, then in your ssh session:</p>
+
+<blockquote>
+mysql -h sitename.db -u username -p<br />
+[[password prompt here]]<br />
+<i>mysql></i> CREATE DATABASE joomla;<Br />
+<i>mysql></i> CREATE USER username IDENTIFIED BY PASSWORD 'password';<br />
+<i>mysql></i> GRANT ALL ON joomla.* TO 'username'@'sitename.db';
+</blockquote>
+
+<p><span class="first">You</span> could do all of that with PHPMyAdmin if you've got it installed, but I don't.  Next up, we've got to set the appropriate permissions.</p>
+
+<blockquote>
+chgrp -R web *<br />
+find . -type f -exec chmod 664 {} \;<br />
+find . -type d -exec chmod 775 {} \;<br />
+</blockquote>
+
+<p><span class="first">Those</span> last two commands take a hot minute to run.  Be patient.  After those commands complete successfully, you can step through the Joomla install script at <strong>http://yourwebsitejoomlainstalldirectory/installation</strong>.  Leave your ssh session open.  It's good for one more thing.  After you finish stepping through the Joomla install script, you'll need to remove the installation directory.</p>
+
+<blockquote>
+rm -r installation/
+</blockquote>
+
+<p><span class="first">That's</span> it!  Everything should work great now.</p>
+    </div>
+  <div class="clear"></div>
+	<script>
+		var idcomments_acct = '0c1241bf41d55ea637977d1a0f209771';
+		var idcomments_post_id;
+		var idcomments_post_url;
+	</script>
+	<span id="IDCommentsPostTitle" style="display:none"></span>
+	<script type='text/javascript' src='http://www.intensedebate.com/js/genericCommentWrapperV2.js'></script>
+  <div id="footer">
+    <p>&nbsp;</p>
+  </div>
+</div>
+</body>
+</html>
